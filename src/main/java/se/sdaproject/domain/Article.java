@@ -1,11 +1,10 @@
+
 package se.sdaproject.domain;
 
-import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Table(name = "articles")
 @Entity
@@ -27,6 +26,18 @@ public class Article {
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Topic> topics = new ArrayList<>();
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
+    }
 
     public List<Comment> getComments() {
         return comments;
@@ -77,7 +88,6 @@ public class Article {
         this.authorName = authorName;
     }
 }
-
 
 
 

@@ -1,5 +1,8 @@
 package se.sdaproject.dto;
+
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleDTO {
     private Long id;
@@ -12,6 +15,20 @@ public class ArticleDTO {
 
     @NotBlank
     private String authorName;
+
+    private List<TopicDTO> topics = new ArrayList<>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<TopicDTO> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<TopicDTO> topics) {
+        this.topics = topics;
+    }
 
     public ArticleDTO(Long id, String title, String body, String authorName){
         this.id = id;

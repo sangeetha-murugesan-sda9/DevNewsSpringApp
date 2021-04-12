@@ -1,5 +1,7 @@
 package se.sdaproject.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.sdaproject.exception.ResourceNotFoundException;
@@ -14,6 +16,7 @@ import java.util.List;
 @Service
 public class CommentService {
     private CommentsRepository commentsRepository;
+    private static final Logger logger = LoggerFactory.getLogger(CommentService.class);
 
 
     @Autowired
@@ -22,6 +25,7 @@ public class CommentService {
     }
 
     public List<CommentDTO> getCommentsByAuthorName(String authorName) {
+        logger.info("Printing author Name", authorName);
         List<Comment> comments = commentsRepository.findByAuthorName(authorName);
         List<CommentDTO> commentDTOS = new ArrayList<>();
         for (Comment comment : comments) {

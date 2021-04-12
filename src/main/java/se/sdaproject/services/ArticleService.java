@@ -1,8 +1,11 @@
 package se.sdaproject.services;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.sdaproject.domain.Article;
+import se.sdaproject.domain.Topic;
+import se.sdaproject.dto.TopicDTO;
 import se.sdaproject.exception.ResourceNotFoundException;
 import se.sdaproject.domain.Comment;
 import se.sdaproject.dto.ArticleDTO;
@@ -10,20 +13,25 @@ import se.sdaproject.dto.CommentDTO;
 import se.sdaproject.exception.NotFoundException;
 import se.sdaproject.repository.ArticleRepository;
 import se.sdaproject.repository.CommentsRepository;
+import se.sdaproject.repository.TopicRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArticleService {
 
     private ArticleRepository articleRepository;
     private CommentsRepository commentsRepository;
+    private TopicRepository topicsRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, CommentsRepository commentsRepository) {
+    public ArticleService(ArticleRepository articleRepository, CommentsRepository commentsRepository,
+                          TopicRepository topicsRepository) {
         this.articleRepository = articleRepository;
         this.commentsRepository = commentsRepository;
+        this.topicsRepository = topicsRepository;
     }
 
     public List<ArticleDTO> listAllArticles() {
@@ -32,6 +40,11 @@ public class ArticleService {
         for (Article article : articles) {
             ArticleDTO articleDTO = new ArticleDTO(article.getId(), article.getTitle(),
                     article.getBody(), article.getAuthorName());
+            List<TopicDTO> topicDTOS = new ArrayList<>();
+            for (Topic topic : article.getTopics()) {
+                topicDTOS.add(getTopicDTO(topic));
+            }
+            articleDTO.setTopics(topicDTOS);
             articleDTOS.add(articleDTO);
         }
         return articleDTOS;
@@ -39,11 +52,14 @@ public class ArticleService {
 
     public ArticleDTO getArticle(Long id) {
         Article article = articleRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        if (article != null) {
-            return new ArticleDTO(article.getId(), article.getTitle(), article.getBody(), article.getAuthorName());
-        } else {
-            throw new NotFoundException("Article does not exists");
+
+        ArticleDTO articleDTO = new ArticleDTO(article.getId(), article.getTitle(), article.getBody(), article.getAuthorName());
+        List<TopicDTO> topicDTOS = new ArrayList<>();
+        for (Topic topic : article.getTopics()) {
+            topicDTOS.add(getTopicDTO(topic));
         }
+        articleDTO.setTopics(topicDTOS);
+        return articleDTO;
     }
 
     public ArticleDTO createArticle(ArticleDTO articleDTO) {
@@ -58,6 +74,7 @@ public class ArticleService {
         updatedArticle.setAuthorName(article.getAuthorName());
         updatedArticle.setBody(article.getBody());
         updatedArticle.setTitle(article.getTitle());
+        updatedArticle.setTopics(updatedArticle.getTopics());
         articleRepository.save(updatedArticle);
 
         return new ArticleDTO(updatedArticle.getId(), updatedArticle.getTitle(),
@@ -90,5 +107,33 @@ public class ArticleService {
         ArticleDTO articleDTO = new ArticleDTO(article.getId(), article.getTitle(), article.getBody(), article.getAuthorName());
         return new CommentDTO(updatedComment.getId(), updatedComment.getBody(), updatedComment.getAuthorName(), articleDTO);
 
+    }
+
+    public List<TopicDTO> getTopicsByArticle(Long articleId) {
+        Article article = articleRepository.findById(articleId).orElseThrow(ResourceNotFoundException::new);
+        List<TopicDTO> topicDTOS = new ArrayList<>();
+        for (Topic topic : article.getTopics()) {
+            topicDTOS.add(getTopicDTO(topic));
+        }
+        return topicDTOS;
+    }
+
+    private TopicDTO getTopicDTO(Topic topic) {
+        return new TopicDTO(topic.getId(), topic.getName());
+    }
+
+    public TopicDTO associateTopicToArticle(Long articleId, TopicDTO topicDTO) {
+        Article article = articleRepository.findById(articleId).orElseThrow(ResourceNotFoundException::new);
+        Topic topic = new Topic(topicDTO.getName());
+        if (topicDTO.getId() != null) {
+            Optional<Topic> existingTopic = topicsRepository.findById(topicDTO.getId());
+            if (!existingTopic.isEmpty()) {
+                topic.setId(existingTopic.get().getId());
+            }
+        }
+        topic.setArticle(article);
+        topic = topicsRepository.save(topic);
+        TopicDTO updatedTopicDTO = new TopicDTO(topic.getId(), topic.getName());
+        return updatedTopicDTO;
     }
 }

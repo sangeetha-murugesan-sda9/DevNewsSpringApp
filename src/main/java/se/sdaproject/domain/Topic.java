@@ -1,15 +1,15 @@
 package se.sdaproject.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
+@Table(name = "topics")
 @Entity
-@Table(name = "topic")
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "topic_id", nullable = false)
+    @Column(name = "topic_id", updatable = false, nullable = false)
     private long id;
 
     @Column(name = "name")
@@ -17,8 +17,16 @@ public class Topic {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id", nullable = false)
+    @JoinColumn(name = "article_id")
     private Article article;
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
 
     public Topic(String name) {
         this.name = name;
@@ -42,13 +50,4 @@ public class Topic {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 }
-

@@ -1,10 +1,12 @@
 package se.sdaproject.rest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.sdaproject.dto.ArticleDTO;
 import se.sdaproject.dto.CommentDTO;
+import se.sdaproject.dto.TopicDTO;
 import se.sdaproject.services.ArticleService;
 
 import javax.validation.Valid;
@@ -61,8 +63,21 @@ public class ArticleController {
     }
 
     @PostMapping("/{articleId}/comments")
-    public ResponseEntity<CommentDTO> createComment(@PathVariable Long articleId, @RequestBody @Valid CommentDTO comment){
+    public ResponseEntity<CommentDTO> createComment(@PathVariable Long articleId, @RequestBody @Valid CommentDTO comment) {
         CommentDTO commentDTO = articleService.createComment(articleId, comment);
         return ResponseEntity.ok().body(commentDTO);
+    }
+
+    @GetMapping("/{articleId}/topics")
+    public ResponseEntity<List<TopicDTO>> getTopicsByArticle(@PathVariable Long articleId) {
+        List<TopicDTO> topicDTOS = articleService.getTopicsByArticle(articleId);
+        return ResponseEntity.ok().body(topicDTOS);
+    }
+
+    @PostMapping("/{articleId}/topics")
+    public ResponseEntity<TopicDTO> associateTopicToArticle(@PathVariable Long articleId,
+                                                            @RequestBody @Valid TopicDTO topic) {
+        TopicDTO topicDTO = articleService.associateTopicToArticle(articleId, topic);
+        return ResponseEntity.ok().body(topicDTO);
     }
 }
