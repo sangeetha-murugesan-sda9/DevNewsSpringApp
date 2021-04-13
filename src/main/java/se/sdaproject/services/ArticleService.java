@@ -1,6 +1,4 @@
 package se.sdaproject.services;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.sdaproject.domain.Article;
@@ -10,7 +8,6 @@ import se.sdaproject.exception.ResourceNotFoundException;
 import se.sdaproject.domain.Comment;
 import se.sdaproject.dto.ArticleDTO;
 import se.sdaproject.dto.CommentDTO;
-import se.sdaproject.exception.NotFoundException;
 import se.sdaproject.repository.ArticleRepository;
 import se.sdaproject.repository.CommentsRepository;
 import se.sdaproject.repository.TopicRepository;
@@ -34,6 +31,9 @@ public class ArticleService {
         this.topicsRepository = topicsRepository;
     }
 
+    /**
+     *  List all articles.
+     */
     public List<ArticleDTO> listAllArticles() {
         List<Article> articles = articleRepository.findAll();
         List<ArticleDTO> articleDTOS = new ArrayList<>();
@@ -50,6 +50,9 @@ public class ArticleService {
         return articleDTOS;
     }
 
+    /**
+     *  Get a specific article based on the provided id.
+     */
     public ArticleDTO getArticle(Long id) {
         Article article = articleRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
@@ -62,6 +65,9 @@ public class ArticleService {
         return articleDTO;
     }
 
+    /**
+     *  Creates a new article
+     */
     public ArticleDTO createArticle(ArticleDTO articleDTO) {
         Article article = new Article(articleDTO.getTitle(), articleDTO.getBody(), articleDTO.getAuthorName());
         Article updatedArticle = articleRepository.save(article);
@@ -69,6 +75,9 @@ public class ArticleService {
         return articleDTO;
     }
 
+    /**
+     *  Updates the given article.
+     */
     public ArticleDTO updateArticle(Long id, ArticleDTO article) {
         Article updatedArticle = articleRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         updatedArticle.setAuthorName(article.getAuthorName());
@@ -81,12 +90,18 @@ public class ArticleService {
                 updatedArticle.getBody(), updatedArticle.getAuthorName());
     }
 
+    /**
+     *  Deletes the given article.
+     */
     public ArticleDTO deleteArticle(Long id) {
         Article article = articleRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         articleRepository.delete(article);
         return new ArticleDTO(article.getId(), article.getTitle(), article.getBody(), article.getAuthorName());
     }
 
+    /**
+     * Get all comments on article given by articleId.
+     */
     public List<CommentDTO> getComments(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(ResourceNotFoundException::new);
         ArticleDTO articleDTO = new ArticleDTO(article.getId(), article.getTitle(), article.getBody(), article.getAuthorName());
@@ -99,6 +114,9 @@ public class ArticleService {
         return commentDTOS;
     }
 
+    /**
+     * Creates a new comment on article .
+     */
     public CommentDTO createComment(Long id, CommentDTO comment) {
         Article article = articleRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         Comment newComment = new Comment(comment.getBody(), comment.getAuthorName());
@@ -109,6 +127,9 @@ public class ArticleService {
 
     }
 
+    /**
+     * Retrieves all topics associated with article given by articleId.
+     */
     public List<TopicDTO> getTopicsByArticle(Long articleId) {
         Article article = articleRepository.findById(articleId).orElseThrow(ResourceNotFoundException::new);
         List<TopicDTO> topicDTOS = new ArrayList<>();
@@ -122,6 +143,9 @@ public class ArticleService {
         return new TopicDTO(topic.getId(), topic.getName());
     }
 
+    /**
+     * Associates the topic with the article given by articleId
+     */
     public TopicDTO associateTopicToArticle(Long articleId, TopicDTO topicDTO) {
         Article article = articleRepository.findById(articleId).orElseThrow(ResourceNotFoundException::new);
         Topic topic = new Topic(topicDTO.getName());

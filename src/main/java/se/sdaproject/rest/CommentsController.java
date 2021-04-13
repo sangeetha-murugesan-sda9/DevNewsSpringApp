@@ -18,19 +18,27 @@ public class CommentsController {
         this.commentService = commentService;
     }
 
+    /**
+     * Returns all comments made by author given by authorName
+     */
     @GetMapping
     public ResponseEntity<List<CommentDTO>> getCommentsByAuthorName(@RequestParam String authorName) {
         List<CommentDTO> commentDTOList = commentService.getCommentsByAuthorName(authorName);
         return ResponseEntity.ok().body(commentDTOList);
     }
 
+    /**
+     * Updates the given comment.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<CommentDTO> updateComment(@PathVariable Long id, @RequestBody CommentDTO updateComment) {
         CommentDTO updatedComment = commentService.updateComment(id, updateComment);
         return ResponseEntity.ok().body(updateComment);
-
     }
 
+    /**
+     * Delete the given comment.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<CommentDTO> deleteComment(@PathVariable Long id) {
         CommentDTO deletedComment = commentService.deleteComment(id);

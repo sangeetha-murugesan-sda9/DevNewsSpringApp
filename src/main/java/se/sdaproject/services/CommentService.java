@@ -23,7 +23,9 @@ public class CommentService {
     public CommentService(CommentsRepository commentsRepository) {
         this.commentsRepository = commentsRepository;
     }
-
+    /**
+     * Get comments by authorName
+     */
     public List<CommentDTO> getCommentsByAuthorName(String authorName) {
         logger.info("Printing author Name", authorName);
         List<Comment> comments = commentsRepository.findByAuthorName(authorName);
@@ -38,6 +40,9 @@ public class CommentService {
         return commentDTOS;
     }
 
+    /**
+     * Updates the comment.
+     */
     public CommentDTO updateComment(Long id, CommentDTO updateComment) {
         Comment comment = commentsRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         comment.setBody(updateComment.getBody());
@@ -49,6 +54,9 @@ public class CommentService {
         return new CommentDTO(id, updatedComment.getBody(), updatedComment.getAuthorName(), articleDTO);
     }
 
+    /**
+     * Delete the comment.
+     */
     public CommentDTO deleteComment(Long id) {
         Comment comment = commentsRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         commentsRepository.delete(comment);

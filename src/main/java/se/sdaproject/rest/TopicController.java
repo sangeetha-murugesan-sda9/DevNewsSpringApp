@@ -22,19 +22,27 @@ public class TopicController {
         this.topicService = topicService;
     }
 
+    /**
+     * Return all topics
+     */
     @GetMapping
     public List<TopicDTO> listAllTopics() {
         List<TopicDTO> topicDTOS = topicService.listAllTopics();
         return topicDTOS;
     }
 
+    /**
+     * Create a new topic.
+     */
     @PostMapping
     public ResponseEntity<TopicDTO> createTopic(@RequestBody @Valid TopicDTO topic) {
         TopicDTO topicDTO = topicService.createTopic(topic);
         return ResponseEntity.status(HttpStatus.CREATED).body(topicDTO);
-
     }
 
+    /**
+     * Updates the given topic.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<TopicDTO> updateTopic(@PathVariable Long id, @RequestBody @Valid TopicDTO topic) {
         TopicDTO updatedTopic = topicService.updateTopic(id, topic);
@@ -42,12 +50,18 @@ public class TopicController {
 
     }
 
+    /**
+     * Delete the given topic.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<TopicDTO> deleteTopic(@PathVariable Long id) {
         TopicDTO topicDTO = topicService.deleteTopic(id);
         return ResponseEntity.ok().body(topicDTO);
     }
 
+    /**
+     * Get articles by Topic
+     */
     @GetMapping("/{id}/articles")
     public ResponseEntity<List<ArticleDTO>> getArticlesByTopic(@PathVariable Long id) {
         List<ArticleDTO> articles = topicService.getArticlesByTopic(id);

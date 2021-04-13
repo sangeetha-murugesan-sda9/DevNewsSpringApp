@@ -22,7 +22,9 @@ public class TopicService {
         this.topicsRepository = topicsRepository;
     }
 
-
+    /**
+     * List all topics
+     */
     public List<TopicDTO> listAllTopics() {
         List<Topic> topics = topicsRepository.findAll();
         List<TopicDTO> topicDTOS = new ArrayList<>();
@@ -33,12 +35,18 @@ public class TopicService {
         return topicDTOS;
     }
 
+    /**
+     * Create a new topic.
+     */
     public TopicDTO createTopic(TopicDTO topicDTO) {
         Topic topic = new Topic(topicDTO.getName());
         topic = topicsRepository.save(topic);
         return new TopicDTO(topic.getId(), topic.getName());
     }
 
+    /**
+     * Updates the given topic
+     */
     public TopicDTO updateTopic(Long id, TopicDTO topicDTO) {
         Topic topic = topicsRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         topic.setName(topicDTO.getName());
@@ -46,6 +54,9 @@ public class TopicService {
         return new TopicDTO(topic.getId(), topic.getName());
     }
 
+    /**
+     * Delete the given topic.
+     */
     public TopicDTO deleteTopic(Long id) {
         Topic topic = topicsRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         topicsRepository.delete(topic);
@@ -53,6 +64,9 @@ public class TopicService {
 
     }
 
+    /**
+     *  Get articles by Topic.
+     */
     public List<ArticleDTO> getArticlesByTopic(Long id) {
         List<Topic> topics = topicsRepository.findByArticleId(id);
 
@@ -64,6 +78,9 @@ public class TopicService {
         return articleDTOS;
     }
 
+    /**
+     * Get article Data Transfer Object.
+     */
     private ArticleDTO getArticleDTO(Article article) {
         return new ArticleDTO(article.getId(), article.getTitle(),
                 article.getBody(), article.getAuthorName());
