@@ -4,8 +4,8 @@ se/sdaproject/repository/ArticleRepository.java
  se.sdaproject.repository.ArticleRepository
 se/sdaproject/dto/ArticleDTO.java
  se.sdaproject.dto.ArticleDTO
-se/sdaproject/rest/ArticleController.java
- se.sdaproject.rest.ArticleController
+se/sdaproject/exception/ResourceNotFoundException.java
+ se.sdaproject.exception.ResourceNotFoundException
 se/sdaproject/dto/TopicDTO.java
  se.sdaproject.dto.TopicDTO
 se/sdaproject/repository/TopicRepository.java
@@ -16,21 +16,21 @@ se/sdaproject/rest/TopicController.java
  se.sdaproject.rest.TopicController
 se/sdaproject/exception/NotFoundException.java
  se.sdaproject.exception.NotFoundException
-se/sdaproject/dto/CommentDTO.java
- se.sdaproject.dto.CommentDTO
 se/sdaproject/rest/CommentsController.java
  se.sdaproject.rest.CommentsController
-se/sdaproject/exception/ResourceNotFoundException.java
- se.sdaproject.exception.ResourceNotFoundException
 se/sdaproject/services/ArticleService.java
  se.sdaproject.services.ArticleService
 se/sdaproject/domain/Topic.java
  se.sdaproject.domain.Topic
+se/sdaproject/rest/ArticleController.java
+ se.sdaproject.rest.ArticleController
 se/sdaproject/domain/Comment.java
  se.sdaproject.domain.Comment
 se/sdaproject/domain/Article.java
  se.sdaproject.domain.Article
 se/sdaproject/services/TopicService.java
  se.sdaproject.services.TopicService
+se/sdaproject/dto/CommentDTO.java
+ se.sdaproject.dto.CommentDTO
 se/sdaproject/services/CommentService.java
  se.sdaproject.services.CommentService

@@ -9,7 +9,7 @@ import java.util.List;
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "topic_id", updatable = false, nullable = false)
+    @Column(name = "topic_id", nullable = false)
     private long id;
 
     @Column(name = "name")
@@ -20,19 +20,22 @@ public class Topic {
     @JoinColumn(name = "article_id")
     private Article article;
 
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
+    public Topic() {
     }
 
     public Topic(String name) {
         this.name = name;
     }
 
-    public Topic() {
+    /**
+     * Getter and Setter methods for id,article,name.
+     */
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public long getId() {

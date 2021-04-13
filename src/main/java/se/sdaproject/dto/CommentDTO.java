@@ -1,5 +1,4 @@
 package se.sdaproject.dto;
-
 import javax.validation.constraints.NotBlank;
 
 public class CommentDTO {

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Table(name = "articles")
 @Entity
 public class Article {
@@ -56,6 +57,9 @@ public class Article {
     public Article() {
     }
 
+    /**
+     * Getter and Setter methods for id,body,title,authorName.
+     */
     public long getId() {
         return id;
     }

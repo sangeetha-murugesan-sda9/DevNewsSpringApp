@@ -1,7 +1,5 @@
 package se.sdaproject.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
@@ -33,7 +31,9 @@ public class Comment {
 
     public Comment() {
     }
-
+    /**
+     * Getter and Setter methods for id,body,article,authorName.
+     */
     public Article getArticle() {
         return article;
     }
