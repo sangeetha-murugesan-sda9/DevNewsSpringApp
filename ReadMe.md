@@ -225,14 +225,14 @@ Endpoints:
 | `DELETE` | `/topics/{id}` | delete the given topic. |
 | `GET`    | `/topics/{topicId}/articles` | return all articles associated with the topic given by `topicId`. |
 
-## List of Files and its functions:
+## List of Files:
 The package se.sdaproject contains domain package,dto package,exception package,repository package,
 rest package and services package.
-The Package domain contains Article.java,Comment.java,Topic.java with DataBase entities.
-The Package dto contains ArticleDTO.java,CommentDTO.java,TopicDTO.java with Data Transfer Objects.
-The Package exception contains NotFoundException.java,ResourceNotFoundException.java for the exceptions.
+The Package domain contains Article.java,Comment.java,Topic.java (DataBase entities).
+The Package dto contains ArticleDTO.java,CommentDTO.java,TopicDTO.java (Data Transfer Objects).
+The Package exception contains NotFoundException.java,ResourceNotFoundException.java (exceptions).
 The Package repository contains ArticleRepository.java,CommentsRepositories.java,TopicRepository.java 
-that are interfaces.
+(interfaces).
 The Package rest contains ArticleControllers.java,CommentsController.java,TopicControllers.java 
 for handling the incoming request and call another part of the application depending on the request action.
 The package services contains ArticleService.java,CommentServices.java,TopicServices.java contains the functionalities.
