@@ -273,7 +273,7 @@ The App.java contains the main() method.
 
 ## Update Comments by Id
 
-![UpdateCommentWithId](ScreenShots/UpdateCommentWithId.png)
+![UpdateComment](ScreenShots/UpdateComment.png)
 
 ## Delete Comments
 
