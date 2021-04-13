@@ -1,11 +1,9 @@
 package se.sdaproject.dto;
-
-import se.sdaproject.domain.Topic;
-
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Topic Data Transfer Objects
+ */
 public class TopicDTO {
 
     private Long id;
@@ -21,6 +19,9 @@ public class TopicDTO {
         this.name = name;
     }
 
+    /**
+     * Getter and Setter methods for id,name.
+     */
     public Long getId() {
         return id;
     }

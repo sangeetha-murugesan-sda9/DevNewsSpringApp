@@ -1,6 +1,9 @@
 package se.sdaproject.dto;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * Comments Data Tranfer Objects.
+ */
 public class CommentDTO {
     private long id;
 
@@ -23,6 +26,9 @@ public class CommentDTO {
 
     }
 
+    /**
+     * Getter and Setter methods for id,body,authorName,article.
+     */
     public long getId() {
         return id;
     }

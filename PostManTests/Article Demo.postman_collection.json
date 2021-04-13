@@ -34,7 +34,10 @@
 		},
 		{
 			"name": "Get Article",
-		        "request": {
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {

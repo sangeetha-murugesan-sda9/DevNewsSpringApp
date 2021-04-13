@@ -4,6 +4,9 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Article Data Tranfer Objects.
+ */
 public class ArticleDTO {
     private Long id;
 
@@ -36,7 +39,9 @@ public class ArticleDTO {
         this.body = body;
         this.authorName = authorName;
     }
-
+    /**
+     * Getter and Setter methods for id,body,title,authorName.
+     */
     public long getId() {
         return id;
     }
