@@ -4,7 +4,7 @@ import java.lang.RuntimeException;
 import org.springframework.http.HttpStatus;
 
 /**
- * Creating ResourceNotFoundException.
+ * ResourceNotFoundException.
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException{

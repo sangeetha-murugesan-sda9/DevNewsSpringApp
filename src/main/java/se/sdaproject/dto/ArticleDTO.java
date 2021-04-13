@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Article Data Tranfer Objects.
+ * Article Data Tranfer Object.
  */
 public class ArticleDTO {
     private Long id;

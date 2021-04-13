@@ -2,7 +2,7 @@ package se.sdaproject.dto;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Comments Data Tranfer Objects.
+ * Comments Data Tranfer Object.
  */
 public class CommentDTO {
     private long id;

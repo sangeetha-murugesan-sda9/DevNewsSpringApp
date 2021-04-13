@@ -11,14 +11,16 @@ all the topics associated with article given by articleId,associate the topic wi
 articleId,update the given topic,delete the given topic,retrieve all articles associated with 
 the topic given by topicId.
 
-It doesn't require a graphical user interface. The User can make the requests  
-and get plain json text responses via curl/Postman.
+It doesn't require a graphical user interface. The User can make the requests and get plain json text responses via 
+curl/Postman.
 
 ## Getting Started
 The application can run directly via Gradle.
 *The code for this application uses the Gradle build tool (https://gradle.org.). Instructions for 
 installing Gradle are available in the official documentation(https://gradle.org/install) 
 which describes several options.*
+
+## How to Run the Application
 The application can also be run via terminal with the Gradle.
 
 ```
@@ -74,6 +76,8 @@ The docker-compose.yaml is manually created.
 To create docker-compose from the terminal ,we need to use the command 
 ```touch docker-compose.yaml ```
 
+and docker-compose.yaml should contain the following.
+
 ## Snippets and Commands
 ```docker-compose.yaml
 version: "3"
@@ -115,11 +119,11 @@ psql demo demo_user
 ```
 6.psql Commands (when inside the database)
 Connect to DataBase:
-```
+```bash
 \c
 ```
 7.Show the tables in the database
-```
+```bash
 \dt
 ```
 8.Show all rows in particular table
@@ -220,5 +224,99 @@ Endpoints:
 | `PUT`    | `/topics/{id}` | update the given topic. |
 | `DELETE` | `/topics/{id}` | delete the given topic. |
 | `GET`    | `/topics/{topicId}/articles` | return all articles associated with the topic given by `topicId`. |
+
+## List of Files and its functions:
+The package se.sdaproject contains domain package,dto package,exception package,repository package,
+rest package and services package.
+The Package domain contains Article.java,Comment.java,Topic.java with DataBase entities.
+The Package dto contains ArticleDTO.java,CommentDTO.java,TopicDTO.java with Data Transfer Objects.
+The Package exception contains NotFoundException.java,ResourceNotFoundException.java for the exceptions.
+The Package repository contains ArticleRepository.java,CommentsRepositories.java,TopicRepository.java 
+that are interfaces.
+The Package rest contains ArticleControllers.java,CommentsController.java,TopicControllers.java 
+for handling the incoming request and call another part of the application depending on the request action.
+The package services contains ArticleService.java,CommentServices.java,TopicServices.java contains the functionalities.
+The App.java contains the main() method.
+
+## ScreenShots (Request and Responses via PostMan)
+## Creating New Article
+
+![CreateNewArticle](ScreenShots/CreateNewArticle.png)
+
+## Get Article
+
+![GetArticles](ScreenShots/GetArticles.png)
+
+## Get Article By Id
+
+![GetArticleById](ScreenShots/GetArticleById.png)
+
+## Update Article
+
+![UpdateArticleWithId](ScreenShots/UpdateArticleWithId.png)
+
+## Delete Article
+
+![DeleteArticle](ScreenShots/DeleteArticle.png)
+
+## Create new Comments for Article
+
+![CreateNewComment](ScreenShots/CreateNewComment.png)
+
+## Get all Comments by Article Id
+
+![GetAllCommentsById](ScreenShots/GetAllCommentsById.png)
+
+## Get all Comments by AuthorName
+
+![AuthorName](ScreenShots/AuthorName.png)
+
+## Update Comments by Id
+
+![UpdateCommentWithId](ScreenShots/UpdateCommentWithId.png)
+
+## Delete Comments
+
+![DeleteComments](ScreenShots/DeleteComments.png)
+
+## Create Topics
+
+![CreateTopics](ScreenShots/CreateTopics.png)
+
+## Get Topics
+
+![GetTopics](ScreenShots/GetTopics.png)
+
+## Get All Topics associated with Article given by Article Id
+
+![ReturnTopicsAssociatedWithArticle](ScreenShots/ReturnTopicsAssociatedWithArticle.png)
+
+## Associate the topic with Article by Article Id
+
+![AssociateTopicWithArticleByArticleId](ScreenShots/AssociateTopicWithArticleByArticleId.png)
+
+## Update the given Topic
+
+![UpdateTheGivenTopic](ScreenShots/UpdateTheGivenTopic.png)
+
+## Delete the Topic by ID
+
+![DeleteTopicById](ScreenShots/DeleteTopicById.png)
+
+## Get all the articles associated with Topic given by Topic Id
+
+![ReturnAllArticlesAssociatedWithTopic](ScreenShots/ReturnAllArticlesAssociatedWithTopic.png)
+
+
+## DataBase ScreenShots
+
+## Running the Containers and Entering the Postgres DataBase and Connecting to DB to view the DB tables.
+
+![DB1](ScreenShots/DB1.png)
+
+## To view all the rows in the particular table (articles,comments,topics)
+
+![DB2](ScreenShots/DB2.png)
+
 
 

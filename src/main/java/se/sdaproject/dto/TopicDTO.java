@@ -2,7 +2,7 @@ package se.sdaproject.dto;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Topic Data Transfer Objects
+ * Topic Data Transfer Object
  */
 public class TopicDTO {
 

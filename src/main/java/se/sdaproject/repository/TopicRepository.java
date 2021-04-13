@@ -4,7 +4,7 @@ import se.sdaproject.domain.Topic;
 import java.util.List;
 
 /**
- * Creating the Topic Repository.
+ * Creating the Topic Repository interface.
  */
 public interface TopicRepository extends JpaRepository<Topic,Long>{
     List<Topic> findByArticleId(Long articleId);

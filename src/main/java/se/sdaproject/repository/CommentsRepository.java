@@ -4,7 +4,7 @@ import se.sdaproject.domain.Comment;
 import java.util.List;
 
 /**
- * Creating the Comments Repository.
+ * Creating the Comments Repository Interface.
  */
 public interface CommentsRepository extends JpaRepository<Comment, Long> {
 
