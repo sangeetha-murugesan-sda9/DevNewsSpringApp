@@ -15,10 +15,9 @@ It doesn't require a graphical user interface. The User can make the requests an
 curl/Postman.
 
 ## Getting Started
-The application can run directly via Gradle.
-*The code for this application uses the Gradle build tool (https://gradle.org.). Instructions for 
+The application can run directly via Gradle. The code for this application uses the Gradle build tool (https://gradle.org.). Instructions for 
 installing Gradle are available in the official documentation(https://gradle.org/install) 
-which describes several options.*
+which describes several options.
 
 ## How to Run the Application
 The application can also be run via terminal with the Gradle.
